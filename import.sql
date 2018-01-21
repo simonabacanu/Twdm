@@ -19,7 +19,7 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Database: `sim`
+-- Database: `master`
 --
 
 -- --------------------------------------------------------
@@ -43,11 +43,14 @@ CREATE TABLE `CART` (
 
 CREATE TABLE `PRODUCTS` (
   `id_product` int(11) NOT NULL,
-  `productName` varchar(32) DEFAULT NULL,
-  `productDescription` varchar(64) DEFAULT NULL,
+  `productName` varchar(100) DEFAULT NULL,
+  `productDescription` varchar(1000) DEFAULT NULL,
   `price` varchar(32) DEFAULT NULL,
   `stock` varchar(14) DEFAULT NULL,
-  `image` varchar(50) NOT NULL
+  `ingredients` varchar(200) DEFAULT NULL,
+  `weight` varchar(15) DEFAULT NULL,
+  `conditions` varchar(100) DEFAULT NULL,
+  `image` varchar(30) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
@@ -55,10 +58,12 @@ CREATE TABLE `PRODUCTS` (
 --
 
 INSERT INTO `PRODUCTS` (`id_product`, `productName`, `productDescription`, `price`, `stock`, `image`) VALUES
-(1, 'produs1', 'aadasdsdasdas', '300', '2', ''),
+(1, 'Iasomnie', 'lala', '100', '2', '' )
 (2, 'produs2', 'aadasdsdasdas', '300', '2', ''),
 (3, 'produs3', 'adsdasd', '100', '4', ''),
 (4, 'produs4', '111', '11111111111', '1', '');
+
+
 
 -- --------------------------------------------------------
 

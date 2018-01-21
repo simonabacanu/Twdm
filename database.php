@@ -7,7 +7,7 @@
 			die('Could not connect: ' . mysql_error());
 		}
 			
-		$db_select = mysqli_select_db($con, "sim");
+		$db_select = mysqli_select_db($con, "master");
 		if (!$db_select) {
 			
 			die("Database selection failed: " . mysqli_error());
@@ -15,6 +15,7 @@
 
 		$sql = "INSERT INTO USERS (firstName,lastName,email,pass,address,phone) VALUES('"
 		.$firstName."','".$lastName."','".$email."','".$pass."','".$address."','".$phone."')"; 	
+		echo $sql;
 		
 		$result = mysqli_query($con,$sql) or die (mysqli_error($con));
 		mysqli_close($con);
@@ -28,7 +29,7 @@
 			die('Could not connect: ' . mysqli_error($con));
 		}
 			
-		$db_select = mysqli_select_db($con, "sim");
+		$db_select = mysqli_select_db($con, "master");
 		if (!$db_select) {
 			die("Database selection failed: " . mysqli_error($con));
 		}
@@ -52,12 +53,14 @@
 			die('Could not connect: ' . mysqli_error($con));
 		}
 			
-		$db_select = mysqli_select_db($con, "sim");
+		$db_select = mysqli_select_db($con, "master");
 		if (!$db_select) {
 			die("Database selection failed: " . mysqli_error($con));
 		}
 			
 		$sql = "SELECT * FROM USERS where id_user = ".$id; 
+		
+		//echo $sql;
 		
 		$user = array("id_user"=>0,
 						   "firstName"=>'', 
@@ -120,17 +123,19 @@
 			die('Could not connect: ' . mysqli_error($con));
 		}
 			
-		$db_select = mysqli_select_db($con, "sim");
+		$db_select = mysqli_select_db($con, "master");
 		if (!$db_select) {
 			die("Database selection failed: " . mysqli_error($con));
 		}
 			
 		$sql = "SELECT * FROM PRODUCTS"; 
+		//echo $sql;
 		
 		$products = array();
 		$result = mysqli_query($con, $sql);
 		
 		while($row = mysqli_fetch_array($result)) {
+			//echo "while";
 			$product = array("id_product"=>$row['id_product'],
 						   "productName"=>$row['productName'], 
 						   "productDescription"=>$row['productDescription'],
@@ -141,11 +146,14 @@
 						   "conditions"=>$row['conditions'],
 						   "image"=>$row['image']);
 			
+			
 			$products[] = $product;
+			
 		}
 		
 		mysqli_close($con);
 		
+		//echo $products;
 		return $products;	
 	}
 	
@@ -155,7 +163,7 @@
 			die('Could not connect: ' . mysqli_error($con));
 		}
 			
-		$db_select = mysqli_select_db($con, "sim");
+		$db_select = mysqli_select_db($con, "master");
 		if (!$db_select) {
 			die("Database selection failed: " . mysqli_error($con));
 		}
@@ -193,7 +201,7 @@
 			die('Could not connect: ' . mysql_error());
 		}
 			
-		$db_select = mysqli_select_db($con, "sim");
+		$db_select = mysqli_select_db($con, "master");
 		if (!$db_select) {
 			
 			die("Database selection failed: " . mysqli_error());
@@ -212,7 +220,7 @@
 			die('Could not connect: ' . mysql_error());
 		}
 			
-		$db_select = mysqli_select_db($con, "sim");
+		$db_select = mysqli_select_db($con, "master");
 		if (!$db_select) {
 			
 			die("Database selection failed: " . mysqli_error());
@@ -231,7 +239,7 @@
 		}
 			
 
-		$db_select = mysqli_select_db($con, "sim");
+		$db_select = mysqli_select_db($con, "master");
 		if (!$db_select) {
 			die("Database selection failed: " . mysqli_error($con));
 		}

@@ -27,8 +27,8 @@ $curr_user = getLoggedUser();
 
 			<?php
 			foreach(getProducts() as $product) {	
+				//echo $product['productName'];
 			?>
-			
 			<a href="detailsProducts.php?id=<?php echo $product['id_product']?>">
 			 <div class=" col-md-3 productGridItem">
 				<div class="col-md-12">
