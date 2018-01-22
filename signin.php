@@ -1,7 +1,7 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <?php
-include("database.php");	
+include("admin/includes/database.php");	
 logUserOut();
 	
 if(isset($_POST['submit'])){
@@ -52,8 +52,8 @@ if(isset($_POST['submit'])){
  </head>
  
  <body>
-	<?php include("header.php"); ?>
-	<?php include("menu.php"); ?>
+	<?php include("includes/header.php"); ?>
+	<?php include("includes/menu.php"); ?>
 	<div class="row loginForm">
 		<div class="col-md-4 col-md-offset-4">
 			<form id="form" action="signin.php" method="post" onsubmit = "return validateForm()">
@@ -85,7 +85,7 @@ if(isset($_POST['submit'])){
 		</div>
 	</div>
 	
-	<?php include("footer.php"); ?>
+	<?php include("includes/footer.php"); ?>
 	
  </body>
 </html> 

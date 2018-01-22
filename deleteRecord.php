@@ -1,6 +1,6 @@
 
 <?php
-	include("database.php"); 
+	include("admin/includes/database.php"); 
 	if(isset($_GET["id"])){
 		$record_id = $_GET["id"];
 		if(deleteRecord($record_id)){

@@ -1,7 +1,7 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 
-<?php include("database.php"); 
+<?php include("admin/includes/database.php"); 
 
 session_start();
 
@@ -55,8 +55,8 @@ $total =0;
  </head>
  
  <body>
-	<?php include("header.php"); ?>
-	<?php include("menu.php"); ?>
+	<?php include("includes/header.php"); ?>
+	<?php include("includes/menu.php"); ?>
 	
 	<div class="container">
 	<table id="cart" class="table table-hover table-condensed">
@@ -119,7 +119,7 @@ $total =0;
 	</table>
 	</div>
 		
-	<?php include("footer.php"); ?>
+	<?php include("includes/footer.php"); ?>
 	
  </body>
  

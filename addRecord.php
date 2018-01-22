@@ -1,6 +1,6 @@
 
 <?php
-	include("database.php"); 
+	include("admin/includes/database.php"); 
 	if(isset($_GET["q"]) && isset($_GET["u"]) && isset($_GET["p"])){
 		$quantity = $_GET["q"];
 		$userId = $_GET["u"];

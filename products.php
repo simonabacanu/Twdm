@@ -1,5 +1,5 @@
 <?php 
-include("database.php");
+include("admin/includes/database.php");
 session_start();
 $curr_user = getLoggedUser();
 
@@ -18,8 +18,8 @@ $curr_user = getLoggedUser();
  </head>
  
  <body>
-	<?php include("header.php"); ?>
-	<?php include("menu.php"); ?>
+	<?php include("includes/header.php"); ?>
+	<?php include("includes/menu.php"); ?>
 	
 
 <div class="container">
@@ -52,7 +52,7 @@ $curr_user = getLoggedUser();
 		 </div>
 	</div>
 	
-	<?php include("footer.php"); ?>
+	<?php include("includes/footer.php"); ?>
 	
  </body>
  
