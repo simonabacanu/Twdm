@@ -1,7 +1,10 @@
 <?php
  
-	function addUser($firstName, $lastName, $email, $pass, $address, $phone){
-			
+ class Controller {
+
+	public function addUser($firstName, $lastName, $email, $pass, $address, $phone){
+		
+		echo "Metoda addUser";
 		$con = mysqli_connect("localhost","root","parola");
 		if (!$con) {
 			die('Could not connect: ' . mysql_error());
@@ -23,7 +26,9 @@
 		return getUserId($email, $pass);
 	}
 	  
-	function getUserId($email, $pass){
+	public function getUserId($email, $pass){
+		
+		echo "Metoda getUserId";
 		$con = mysqli_connect("localhost","root","parola");
 		if (!$con) {
 			die('Could not connect: ' . mysqli_error($con));
@@ -47,7 +52,9 @@
 		return $id;		
 	} 
 	
-	function getUserForId($id){
+	public function getUserForId($id){
+		
+		echo "Metoda getUserForId";
 		$con = mysqli_connect("localhost","root","parola");
 		if (!$con) {
 			die('Could not connect: ' . mysqli_error($con));
@@ -89,8 +96,9 @@
 	} 
 	
 	
-	function logUserIn($id){
+	public function logUserIn($id){
 		
+		echo "Metoda logUserIn";
 		session_start();		
 		$_SESSION['auth'] = 1;
 		setcookie("id_user", $id, time()+(60*60*8)); //set cookie to expire in 8h
@@ -98,7 +106,9 @@
 		die();
 	}
 	
-	function getLoggedUser(){
+	public function getLoggedUser(){
+		
+		echo "Metoda getLoggedUser";
 		if (!isset($_SESSION['auth']) || $_SESSION['auth'] != 1) {
 		   return 0;
 		} 
@@ -110,14 +120,18 @@
 		}
 	}
 	
-	function logUserOut() {
+	public function logUserOut() {
+		
+		echo "Metoda logUserOut";
 		$_SESSION['auth'] = 0;
 		setcookie("id_user", 0, time()-(60*60)); //clear cookie 
 	}
 	
 	// PRODUCTS
 	
-	function getProducts() {	
+	public function getProducts() {	
+		
+		echo "Metoda getProducts";
 		$con = mysqli_connect("localhost","root","parola");
 		if (!$con) {
 			die('Could not connect: ' . mysqli_error($con));
@@ -157,7 +171,9 @@
 		return $products;	
 	}
 	
-	function getProductById($id) {	
+	public function getProductById($id) {	
+		
+		echo "Metoda getProductById";
 		$con = mysqli_connect("localhost","root","parola");
 		if (!$con) {
 			die('Could not connect: ' . mysqli_error($con));
@@ -194,8 +210,9 @@
 	
 	// RECORDS
 	
-	function addRecord($quantity, $id_user,$id_product) {
-	
+	public function addRecord($quantity, $id_user,$id_product) {
+		
+		echo "Metoda addRecord";	
 		$con = mysqli_connect("localhost","root","parola");
 		if (!$con) {
 			die('Could not connect: ' . mysql_error());
@@ -213,8 +230,9 @@
 		return $result;
 	}
 	
-	function deleteRecord($id_record) {
+	public function deleteRecord($id_record) {
 	
+		echo "Metoda deleteRecord";
 		$con = mysqli_connect("localhost","root","parola");
 		if (!$con) {
 			die('Could not connect: ' . mysql_error());
@@ -232,7 +250,9 @@
 		return $result;
 	}
 	
-	function getRecordsForUserId($id) {	
+	public function getRecordsForUserId($id) {	
+		
+		echo "Metoda getRecordsForUSerId";
 		$con = mysqli_connect("localhost","root","parola");
 		if (!$con) {
 			die('Could not connect: ' . mysqli_error($con));
@@ -262,5 +282,7 @@
 		
 		return $records;	
 	}
+
+}
 	
 ?>
