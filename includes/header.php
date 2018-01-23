@@ -1,5 +1,7 @@
-<?php $current_user  = getLoggedUser();
-$usr = getUserForId(getLoggedUser());
+<?php 
+$controller = new Controller();
+$current_user  = $controller -> getLoggedUser();
+$usr = $controller -> getUserForId($current_user);
  ?>
 
 <nav class="navbar navbar-default header">
