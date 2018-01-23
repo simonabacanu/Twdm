@@ -1,16 +1,18 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 
-<?php include("admin/includes/database.php"); 
+<?php include("admin/includes/controller.php"); 
+
+$controller = new Controller();
 
 session_start();
 
-$curr_user = getLoggedUser();
+$curr_user = $controller -> getLoggedUser();
 if ($curr_user == 0 ) {
 	exit();
 }
 
-$total =0;
+$total = 0;
 
 ?>
 
@@ -24,7 +26,7 @@ $total =0;
 	<script src="js/jquery-3.2.1.min" type="text/javascript"></script>
 	<script src="js/bootstrap.min.js" type="text/javascript"></script>
  
-  <title>Login</title>
+  <title>Shopping Cart</title>
  
 	<script type="text/javascript">
   
@@ -77,8 +79,8 @@ $total =0;
 		
 		<tbody id="cart_body">
 		<?php
-		foreach(getRecordsForUserId($curr_user) as $record) {
-			$product = getProductById($record['id_product']) ;
+		foreach($controller -> getRecordsForUserId($curr_user) as $record) {
+			$product = $controller -> getProductById($record['id_product']) ;
 			$total += $record['quantity'] * $product['price'];
 		?>
 		

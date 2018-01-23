@@ -2,6 +2,8 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <?php
 include("admin/includes/controller.php"); 
+$controller = new Controller();
+
 if(isset($_POST['submit'])){
 	$firstName = isset($_POST["firstName"]) ? $_POST["firstName"] : "";
 	$lastName = isset($_POST["lastName"]) ? $_POST["lastName"] : "";
@@ -10,11 +12,11 @@ if(isset($_POST['submit'])){
 	$email = isset($_POST["email"]) ? $_POST["email"] : "";
 	$pass = isset($_POST["password"]) ? $_POST["password"] : "";
 	
-	$id = addUser($firstName, $lastName,$email ,$pass,$address,$phone);
+	$id = $controller -> addUser($firstName, $lastName,$email ,$pass,$address,$phone);
 	echo "ID ADDED : ".$id;
 	if($id !=0){
 		echo "User Added";
-		logUserIn($id);
+		$controller -> logUserIn($id);
 	}
 }
 ?>
@@ -63,8 +65,8 @@ if(isset($_POST['submit'])){
  </head>
 	<body>
 	
-	<?php include("header.php"); ?>
-	<?php include("menu.php"); ?>
+	<?php include("includes/header.php"); ?>
+	<?php include("includes/menu.php"); ?>
 	
 		<div class="row registerForm contentPadding">
 			<div class="col-md-4 col-md-offset-4">
@@ -118,7 +120,7 @@ if(isset($_POST['submit'])){
 			</div>
 		</div>
 		
-	<?php include("footer.php"); ?>
+	<?php include("includes/footer.php"); ?>
 	</body>
  
 </html> 

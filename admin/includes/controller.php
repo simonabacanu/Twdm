@@ -23,7 +23,8 @@
 		$result = mysqli_query($con,$sql) or die (mysqli_error($con));
 		mysqli_close($con);
 		
-		return getUserId($email, $pass);
+		echo "User added";
+		return $this -> getUserId($email, $pass);
 	}
 	  
 	public function getUserId($email, $pass){
@@ -227,7 +228,7 @@
 		$sql = "INSERT INTO RECORDS (quantity,id_user, id_product) VALUES(".$quantity.",".$id_user.",".$id_product.")"; 		
 		$result = mysqli_query($con,$sql) or die (mysqli_error($con));
 		mysqli_close($con);
-		return $result;
+		return  $result;
 	}
 	
 	public function deleteRecord($id_record) {

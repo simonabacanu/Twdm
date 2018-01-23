@@ -1,16 +1,18 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <?php 
-include("admin/includes/database.php");
+include("admin/includes/controller.php");
+$controller = new Controller();
+
 session_start();
 
 if(isset($_GET['id'])){
-	$product = getProductById($_GET['id']);
+	$product = $controller -> getProductById($_GET['id']);
 } else {
 	exit();
 }	
 
-$curr_user = getLoggedUser();
+$curr_user = $controller -> getLoggedUser();
 ?>
 
 <html xmlns="http://www.w3.org/1999/xhtml">
