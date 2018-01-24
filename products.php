@@ -2,11 +2,13 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <?php 
 include("admin/includes/controller.php");
+echo "Dupa include controller";
 
 $controller = new Controller();
 $curr_user = $controller -> getLoggedUser();
 
 session_start();
+echo "Dupa session start";
 
 ?>
 
@@ -22,7 +24,7 @@ session_start();
  </head>
  
  <body>
-	  <?php  include("includes/header.php"); ?>
+	  <?php include("includes/header.php"); ?>
 	  <?php include("includes/menu.php"); ?>
 	
 
@@ -30,22 +32,21 @@ session_start();
 		<div class="row">
 
 			<?php
-			foreach($controller -> getProducts() as $product) {	
-				//echo $product['productName'];
+			foreach($controller->getProducts() as $product) {	
 			?>
-			<a href="detailsProducts.php?id=<?php echo $product['id_product']?>">
+			<a href="detailsProducts.php?id=<?php echo $product->getIdProduct()?>">
 			 <div class=" col-md-3 productGridItem">
 				<div class="col-md-12">
-					<img alt="product" src="<?php echo $product['image'] ?>" class="img-responsive"/>
+					<img alt="product" src="<?php echo $product->getImage()?>" class="img-responsive"/>
 				</div>
 				
 				<hr/>
 				
 				<div class="col-md-12 productGridInfo ">
-					<h3><?php echo $product['productName'] ?></h3>
-					<p>Pret : <?php echo $product['price'] ?></p>
+					<h3><?php echo $product->getProductName()?></h3>
+					<p>Pret : <?php echo $product->getPrice() ?></p>
 
-				</div>
+				 </div>
 				
 				<hr/>
 			</div>

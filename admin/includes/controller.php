@@ -1,4 +1,7 @@
 <?php
+
+include("includes/models/product.php");
+
  
  class Controller {
 
@@ -151,15 +154,15 @@
 		
 		while($row = mysqli_fetch_array($result)) {
 			//echo "while";
-			$product = array("id_product"=>$row['id_product'],
-						   "productName"=>$row['productName'], 
-						   "productDescription"=>$row['productDescription'],
-						   "price"=>$row['price'],
-						   "stock"=>$row['stock'],
-						   "ingredients"=>$row['ingredients'],
-						   "weight"=>$row['weight'],
-						   "conditions"=>$row['conditions'],
-						   "image"=>$row['image']);
+			$product = new Product ($row['id_product'],
+						   $row['productName'], 
+						   $row['productDescription'],
+						   $row['price'],
+						   $row['stock'],
+						   $row['ingredients'],
+						   $row['weight'],
+						   $row['conditions'],
+						   $row['image']);
 			
 			
 			$products[] = $product;
