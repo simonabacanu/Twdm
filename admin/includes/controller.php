@@ -213,7 +213,6 @@ include("includes/models/user.php");
 		}
 
 		$sql = "INSERT INTO RECORDS (quantity,id_user, id_product) VALUES(".$quantity.",".$id_user.",".$id_product.")"; 	
-		echo $sql;
 		$result = mysqli_query($con,$sql) or die (mysqli_error($con));
 		mysqli_close($con);
 		return  $result;

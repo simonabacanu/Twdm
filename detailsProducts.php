@@ -6,13 +6,27 @@ $controller = new Controller();
 
 session_start();
 
+$curr_user = $controller -> getLoggedUser();
 if(isset($_GET['id'])){
 	$product = $controller -> getProductById($_GET['id']);
 } else {
-	exit();
+	
+	if(isset($_POST['submit'])){
+		$user_id = isset($_POST["current_user"]) ? $_POST["current_user"] : 0;
+		$product_id = isset($_POST["current_product"]) ? $_POST["current_product"] : 0;
+		$quantity = isset($_POST["quantity"]) ? $_POST["quantity"] : 0;
+		
+		if ($user_id >0 && $product_id > 0 && $quantity > 0) {
+			$controller -> addRecord($quantity, $user_id,$product_id);
+		}
+		
+		$product = $controller -> getProductById($product_id);
+	} else {
+		exit();
+	}
 }	
 
-$curr_user = $controller -> getLoggedUser();
+
 ?>
 
 <html xmlns="http://www.w3.org/1999/xhtml">
@@ -23,39 +37,7 @@ $curr_user = $controller -> getLoggedUser();
 	<link rel="stylesheet" type="text/css" href="css/style.css"/>
 	<script src="js/jquery-3.2.1.min" type="text/javascript"></script>
 	<script src="js/bootstrap.min.js" type="text/javascript"></script>
-	
-	<script type="text/javascript">
   
-	function addRecord() {
-
-		if (window.XMLHttpRequest) {
-			// code for IE7+, Firefox, Chrome, Opera, Safari
-			xmlhttp = new XMLHttpRequest();
-		}
-		 else {
-			// code for IE6, IE5
-			xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
-		}
-		 xmlhttp.onreadystatechange = function() {
-			if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
-				alert(xmlhttp.responseText);
-			}
-		 }
-		 
-		 var stock = document.getElementById ( "stock" ).innerText
-		 var quantity = document.getElementById('quantity').value;
-		 var curr_user = document.getElementById('current_user').value;
-		 var productId = document.getElementById('current_product').value;
-		 
-		 if(stock < quantity) {
-			 alert("Not in stock");
-			 return;
-		 }
-		 
-		 xmlhttp.open("GET", "addRecord.php?q="+quantity+"&u="+curr_user+"&p="+productId, true);
-		 xmlhttp.send();
-	}
-</script> 
  </head>
  
  <body>
@@ -120,14 +102,23 @@ $curr_user = $controller -> getLoggedUser();
 				<fieldset>
 		
 				<div class="row">
-						<div class="col-md-5">
-							<input type="text" name="quantity" id="quantity" class="form-control input-lg" value = "0">
-							<input type="hidden" id="current_user" value="<?php echo $curr_user?>">
-							<input type="hidden" id="current_product" value="<?php echo $product->getIdProduct()?>">
-						</div>
-						<div class="col-md-5">
-							<input type="button" name="submit" class="btn btn-lg btn-success btn-block" value="Add To Cart" onclick="addRecord();">
-						</div>
+						
+							
+							<form id="form" action="detailsProducts.php" method="post">
+								
+								<div class="col-md-5">
+									<input type="text" name="quantity" id="quantity" class="form-control input-lg" value = "0"/>
+								</div>
+								
+								<div class="col-md-5">
+									<input type="hidden" name="current_user" value="<?php echo $curr_user?>">
+							    	<input type="hidden" name="current_product" value="<?php echo $product->getIdProduct()?>">
+									<input type="submit" name="submit" class="btn btn-lg btn-success btn-block" value="Add To Cart"/>
+								</div>
+								
+							</form>
+							
+						
 				</div>
 				<br/>
 					
