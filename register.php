@@ -66,7 +66,6 @@ if(isset($_POST['submit'])){
 	<body>
 	
 	<?php include("includes/header.php"); ?>
-	<?php include("includes/menu.php"); ?>
 	
 		<div class="row registerForm contentPadding">
 			<div class="col-md-4 col-md-offset-4">

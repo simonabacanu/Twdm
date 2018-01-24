@@ -1,5 +1,22 @@
 
+html {
+	position: relative;
+	min-height: 100%;
+}
+
+body {
+	padding-top:150px;
+	margin: 0 0 100px;
+}
+
 /* __________ HEADER _________ */
+
+header {
+	position:fixed;
+	width:100%;
+	top:0;
+	z-index: 500;
+}
 
 .header {
 	margin:0px;

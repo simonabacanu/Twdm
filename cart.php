@@ -58,7 +58,6 @@ $total = 0;
  
  <body>
 	<?php include("includes/header.php"); ?>
-	<?php include("includes/menu.php"); ?>
 	
 	<div class="container">
 	<table id="cart" class="table table-hover table-condensed">
@@ -80,26 +79,26 @@ $total = 0;
 		<tbody id="cart_body">
 		<?php
 		foreach($controller -> getRecordsForUserId($curr_user) as $record) {
-			$product = $controller -> getProductById($record['id_product']) ;
-			$total += $record['quantity'] * $product['price'];
+			$product = $controller->getProductById($record->getIdProduct());
+			$total += $record->getQuantity() * $product->getPrice();
 		?>
 		
-			<tr id=  "<?php echo $record['id_record']?>">
+			<tr id=  "<?php echo $record->getIdRecord()?>">
 				<td data-th="Product">
 					<div class="row">
-						<div class="col-md-2"><img src="<?php echo $product['image']?>" alt="" class="img-responsive"/></div>
+						<div class="col-md-2"><img src="<?php echo $product->getImage()?>" alt="" class="img-responsive"/></div>
 						<div class="col-md-10">
-							<h4 class="nomargin"><?php echo $product['productName']?></h4>
-							<p><?php echo $product['productDescription']?></p>
+							<h4 class="nomargin"><?php echo $product->getProductName()?></h4>
+							<p><?php echo $product->getProductDescription()?></p>
 						</div>
 					</div>
 				</td>
 				
-				<td data-th="Price"><?php echo $product['price']?></td>
-				<td data-th="Quantity"> <?php echo $record['quantity']?></td>
-				<td data-th="Subtotal" class="text-center"><?php echo $record['quantity'] * $product['price']?></td>
+				<td data-th="Price"><?php echo $product->getPrice()?></td>
+				<td data-th="Quantity"> <?php echo $record->getQuantity()?></td>
+				<td data-th="Subtotal" class="text-center"><?php echo $record->getQuantity() * $product->getPrice()?></td>
 				<td class="actions" data-th="">
-					<button class="btn btn-danger btn-sm" onclick="deleteRecord(this.value);" value="<?php echo $record['id_record']?>">Remove</button>	
+					<button class="btn btn-danger btn-sm" onclick="deleteRecord(this.value);" value="<?php echo $record->getIdRecord()?>">Remove</button>	
 				</td>
 			</tr>
 			

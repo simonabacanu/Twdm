@@ -1,13 +1,14 @@
 <?php
 
 include("includes/models/product.php");
+include("includes/models/record.php");
+include("includes/models/user.php");
+
 
  
  class Controller {
 
 	public function addUser($firstName, $lastName, $email, $pass, $address, $phone){
-		
-		echo "Metoda addUser";
 		$con = mysqli_connect("localhost","root","parola");
 		if (!$con) {
 			die('Could not connect: ' . mysql_error());
@@ -32,7 +33,6 @@ include("includes/models/product.php");
 	  
 	public function getUserId($email, $pass){
 		
-		echo "Metoda getUserId";
 		$con = mysqli_connect("localhost","root","parola");
 		if (!$con) {
 			die('Could not connect: ' . mysqli_error($con));
@@ -44,7 +44,6 @@ include("includes/models/product.php");
 		}
 			
 		$sql = "SELECT * FROM USERS where email = '".$email."' AND pass ='".$pass."'"; 
-		echo $sql;
 		$result = mysqli_query($con, $sql);
 		$id =0;
 		while($row = mysqli_fetch_array($result)) {
@@ -58,7 +57,6 @@ include("includes/models/product.php");
 	
 	public function getUserForId($id){
 		
-		echo "Metoda getUserForId";
 		$con = mysqli_connect("localhost","root","parola");
 		if (!$con) {
 			die('Could not connect: ' . mysqli_error($con));
@@ -71,27 +69,19 @@ include("includes/models/product.php");
 			
 		$sql = "SELECT * FROM USERS where id_user = ".$id; 
 		
-		//echo $sql;
-		
-		$user = array("id_user"=>0,
-						   "firstName"=>'', 
-						   "lastName"=>'',
-						   "email"=>'',
-						   "pass"=>'',
-					 	   "address"=>'',
-					       "phone"=>'');
+		$user = new User(0,'', '', '' , '' , '', '', '');
+	
 		$result = mysqli_query($con, $sql);
 		
 		
 		while($row = mysqli_fetch_array($result)) {
-			$user = array("id_user"=>$row['id_user'],
-						   "firstName"=>$row['firstName'], 
-						   "lastName"=>$row['lastName'],
-						   "email"=>$row['email'],
-						   "pass"=>$row['pass'],
-						   "address"=>$row['address'],
-						  "phone"=>$row['phone']);
-
+			$user = new User($row['id_user'],
+						     $row['firstName'], 
+						     $row['lastName'],
+						     $row['email'],
+						     $row['pass'],
+						     $row['address'],
+						     $row['phone']);
 		}
 		
 		mysqli_close($con);
@@ -102,7 +92,6 @@ include("includes/models/product.php");
 	
 	public function logUserIn($id){
 		
-		echo "Metoda logUserIn";
 		session_start();		
 		$_SESSION['auth'] = 1;
 		setcookie("id_user", $id, time()+(60*60*8)); //set cookie to expire in 8h
@@ -112,7 +101,6 @@ include("includes/models/product.php");
 	
 	public function getLoggedUser(){
 		
-		echo "Metoda getLoggedUser";
 		if (!isset($_SESSION['auth']) || $_SESSION['auth'] != 1) {
 		   return 0;
 		} 
@@ -126,7 +114,6 @@ include("includes/models/product.php");
 	
 	public function logUserOut() {
 		
-		echo "Metoda logUserOut";
 		$_SESSION['auth'] = 0;
 		setcookie("id_user", 0, time()-(60*60)); //clear cookie 
 	}
@@ -135,7 +122,6 @@ include("includes/models/product.php");
 	
 	public function getProducts() {	
 		
-		echo "Metoda getProducts";
 		$con = mysqli_connect("localhost","root","parola");
 		if (!$con) {
 			die('Could not connect: ' . mysqli_error($con));
@@ -177,7 +163,6 @@ include("includes/models/product.php");
 	
 	public function getProductById($id) {	
 		
-		echo "Metoda getProductById";
 		$con = mysqli_connect("localhost","root","parola");
 		if (!$con) {
 			die('Could not connect: ' . mysqli_error($con));
@@ -195,15 +180,15 @@ include("includes/models/product.php");
 		$product;
 		
 		while($row = mysqli_fetch_array($result)) {
-				$product = array("id_product"=>$row['id_product'],
-						   "productName"=>$row['productName'], 
-						   "productDescription"=>$row['productDescription'],
-						   "price"=>$row['price'],
-						   "stock"=>$row['stock'],
-						   "ingredients"=>$row['ingredients'],
-						   "weight"=>$row['weight'],
-						   "conditions"=>$row['conditions'],
-						   "image"=>$row['image']);
+				$product = new Product($row['id_product'],
+						               $row['productName'], 
+						               $row['productDescription'],
+						               $row['price'],
+						               $row['stock'],
+						               $row['ingredients'],
+						               $row['weight'],
+						               $row['conditions'],
+						               $row['image']);
 			
 		}
 		
@@ -216,7 +201,6 @@ include("includes/models/product.php");
 	
 	public function addRecord($quantity, $id_user,$id_product) {
 		
-		echo "Metoda addRecord";	
 		$con = mysqli_connect("localhost","root","parola");
 		if (!$con) {
 			die('Could not connect: ' . mysql_error());
@@ -228,7 +212,8 @@ include("includes/models/product.php");
 			die("Database selection failed: " . mysqli_error());
 		}
 
-		$sql = "INSERT INTO RECORDS (quantity,id_user, id_product) VALUES(".$quantity.",".$id_user.",".$id_product.")"; 		
+		$sql = "INSERT INTO RECORDS (quantity,id_user, id_product) VALUES(".$quantity.",".$id_user.",".$id_product.")"; 	
+		echo $sql;
 		$result = mysqli_query($con,$sql) or die (mysqli_error($con));
 		mysqli_close($con);
 		return  $result;
@@ -236,7 +221,6 @@ include("includes/models/product.php");
 	
 	public function deleteRecord($id_record) {
 	
-		echo "Metoda deleteRecord";
 		$con = mysqli_connect("localhost","root","parola");
 		if (!$con) {
 			die('Could not connect: ' . mysql_error());
@@ -256,7 +240,6 @@ include("includes/models/product.php");
 	
 	public function getRecordsForUserId($id) {	
 		
-		echo "Metoda getRecordsForUSerId";
 		$con = mysqli_connect("localhost","root","parola");
 		if (!$con) {
 			die('Could not connect: ' . mysqli_error($con));
@@ -274,10 +257,11 @@ include("includes/models/product.php");
 		$result = mysqli_query($con, $sql);
 		
 		while($row = mysqli_fetch_array($result)) {
-			$record = array("id_record"=>$row['id_record'],
-					"quantity"=>$row['quantity'], 
-					"id_user"=>$row['id_user'],
-					"id_product"=>$row['id_product']);
+
+			$record = new Record($row['id_record'],
+					             $row['quantity'], 
+					             $row['id_user'],
+					             $row['id_product']);
 			
 			$records[] = $record;
 		}

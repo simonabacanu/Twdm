@@ -2,13 +2,11 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <?php 
 include("admin/includes/controller.php");
-echo "Dupa include controller";
 
 $controller = new Controller();
 $curr_user = $controller -> getLoggedUser();
 
 session_start();
-echo "Dupa session start";
 
 ?>
 
@@ -25,7 +23,6 @@ echo "Dupa session start";
  
  <body>
 	  <?php include("includes/header.php"); ?>
-	  <?php include("includes/menu.php"); ?>
 	
 
 <div class="container">

@@ -60,7 +60,6 @@ $curr_user = $controller -> getLoggedUser();
  
  <body>
 	<?php include("includes/header.php"); ?>
-	<?php include("includes/menu.php"); ?>
 	
 	
 	<div class="container">
@@ -74,13 +73,13 @@ $curr_user = $controller -> getLoggedUser();
 			<div class="panel panel-info">
 			
 				<div class="panel-heading">
-					<h4 id = "product_name"><?php echo $product['productName']?></h4>
+					<h4 id = "product_name"><?php echo $product->getProductName()?></h4>
 				</div>
 				<div class="panel-body">
 					<div class="row">
 					
 						<div class="col-md-3"> 
-							<img alt="User Pic" class="img-responsive" src="<?php echo $product['image']?>" />
+							<img alt="User Pic" class="img-responsive" src="<?php echo $product->getImage()?>" />
 						</div>
 						
 						
@@ -88,26 +87,26 @@ $curr_user = $controller -> getLoggedUser();
 							<table class="table detailsTable">
 								<tbody>
 							<tr>
-								<td class="detailsTableHeading">Name:</td> <td><?php echo $product['productName'] ?></td>
+								<td class="detailsTableHeading">Name:</td> <td><?php echo $product->getProductName() ?></td>
 							</tr>
 							<tr>
-								<td class="detailsTableHeading">Price :</td> <td><?php echo $product['price']?></td>
+								<td class="detailsTableHeading">Price :</td> <td><?php echo $product->getPrice()?></td>
 							</tr>
 							<tr>
-								<td class="detailsTableHeading">Weight</td><td><?php echo $product['weight']?></td>
+								<td class="detailsTableHeading">Weight</td><td><?php echo $product->getWeight()?></td>
 							</tr> 
 							<tr>
-								<td class="detailsTableHeading">Ingredients</td><td><?php echo $product['ingredients']?></td>
+								<td class="detailsTableHeading">Ingredients</td><td><?php echo $product->getIngredients()?></td>
 							</tr>
 							<tr>
-								<td class="detailsTableHeading">Conditions</td> <td><?php echo $product['conditions']?></td>
+								<td class="detailsTableHeading">Conditions</td> <td><?php echo $product->getConditions()?></td>
 							</tr>
 							<tr>
-								<td class="detailsTableHeading">Stock</td> <td id ="stock"><?php echo $product['stock']?></td> 
+								<td class="detailsTableHeading">Stock</td> <td id ="stock"><?php echo $product->getStocK()?></td> 
 							</tr> 
 
 							<tr>
-								<td class="detailsTableHeading">Description</td> <td><?php echo $product['productDescription']?></td> 
+								<td class="detailsTableHeading">Description</td> <td><?php echo $product->getProductDescription()?></td> 
 							</tr> 
  
 							</tbody>
@@ -124,7 +123,7 @@ $curr_user = $controller -> getLoggedUser();
 						<div class="col-md-5">
 							<input type="text" name="quantity" id="quantity" class="form-control input-lg" value = "0">
 							<input type="hidden" id="current_user" value="<?php echo $curr_user?>">
-							<input type="hidden" id="current_product" value="<?php echo $product['id_product']?>">
+							<input type="hidden" id="current_product" value="<?php echo $product->getIdProduct()?>">
 						</div>
 						<div class="col-md-5">
 							<input type="button" name="submit" class="btn btn-lg btn-success btn-block" value="Add To Cart" onclick="addRecord();">

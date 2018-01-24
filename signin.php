@@ -54,7 +54,8 @@ if(isset($_POST['submit'])){
  
  <body>
 	<?php include("includes/header.php"); ?>
-	<?php include("includes/menu.php"); ?>
+	 
+	
 	<div class="row loginForm">
 		<div class="col-md-4 col-md-offset-4">
 			<form id="form" action="signin.php" method="post" onsubmit = "return validateForm()">
