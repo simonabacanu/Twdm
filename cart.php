@@ -14,6 +14,13 @@ if ($curr_user == 0 ) {
 
 $total = 0;
 
+if(isset($_POST['submit'])){
+	$record_id= isset($_POST["delete_record"]) ? $_POST["delete_record"] : 0;
+	if ($record_id != 0) {
+		$controller -> deleteRecord($record_id);
+	}
+}
+
 ?>
 
 <html xmlns="http://www.w3.org/1999/xhtml">
@@ -27,32 +34,6 @@ $total = 0;
 	<script src="js/bootstrap.min.js" type="text/javascript"></script>
  
   <title>Shopping Cart</title>
- 
-	<script type="text/javascript">
-  
-	function deleteRecord(record_id) {
-
-		if (window.XMLHttpRequest) {
-			// code for IE7+, Firefox, Chrome, Opera, Safari
-			xmlhttp = new XMLHttpRequest();
-		}
-		 else {
-			// code for IE6, IE5
-			xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
-		}
-		
-		var elem = document.getElementById(record_id);
-		
-		 xmlhttp.onreadystatechange = function() {
-			if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {				
-				elem.parentNode.removeChild(elem);
-			} 
-		 }
-		 
-		 xmlhttp.open("GET", "deleteRecord.php?id="+record_id, true);
-		 xmlhttp.send();
-	}
-</script> 
  
  </head>
  
@@ -97,8 +78,12 @@ $total = 0;
 				<td data-th="Price"><?php echo $product->getPrice()?></td>
 				<td data-th="Quantity"> <?php echo $record->getQuantity()?></td>
 				<td data-th="Subtotal" class="text-center"><?php echo $record->getQuantity() * $product->getPrice()?></td>
+				
 				<td class="actions" data-th="">
-					<button class="btn btn-danger btn-sm" onclick="deleteRecord(this.value);" value="<?php echo $record->getIdRecord()?>">Remove</button>	
+					<form id="form" action="cart.php" method="post">
+						<input type="hidden" name="delete_record" value="<?php echo $record->getIdRecord()?>"/>
+						<input type="submit" name="submit" class="btn btn-danger btn-sm" value="Remove"/>
+					</form>
 				</td>
 			</tr>
 			

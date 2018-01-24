@@ -32,15 +32,16 @@ session_start();
 			foreach($controller->getProducts() as $product) {	
 			?>
 			<a href="detailsProducts.php?id=<?php echo $product->getIdProduct()?>">
-			 <div class=" col-md-3 productGridItem">
+				
+			 <div class=" col-md-4">
 				<div class="col-md-12">
 					<img alt="product" src="<?php echo $product->getImage()?>" class="img-responsive"/>
 				</div>
 				
 				<hr/>
 				
-				<div class="col-md-12 productGridInfo ">
-					<h3><?php echo $product->getProductName()?></h3>
+				<div class="col-md-12">
+					<h4><?php echo $product->getProductName()?></h4>
 					<p>Pret : <?php echo $product->getPrice() ?></p>
 
 				 </div>
